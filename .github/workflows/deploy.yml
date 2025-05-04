@@ -6,7 +6,7 @@ on:
       - main
 
 jobs:
-  test-auth:
+  test-pipeline:
     runs-on: ubuntu-latest
 
     steps:
@@ -18,5 +18,10 @@ jobs:
       with:
         creds: ${{ secrets.AZURE_CREDENTIALS }}
 
-    - name: Echo success (simulate deployment)
-      run: echo "✅ Successfully authenticated to Azure. No deployment executed."
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.x'
+
+    - name: Run Sentinel use case simulation
+      run: python .github/scripts/validate_rules.py
