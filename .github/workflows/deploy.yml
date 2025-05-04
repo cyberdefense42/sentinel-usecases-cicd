@@ -1,4 +1,4 @@
-name: Sentinel CI/CD Deployment
+name: Sentinel CI/CD Test
 
 on:
   push:
@@ -6,17 +6,17 @@ on:
       - main
 
 jobs:
-  deploy-to-sentinel:
+  test-auth:
     runs-on: ubuntu-latest
+
     steps:
+    - name: Checkout repo
+      uses: actions/checkout@v3
 
-    - name: Checkout Code
-      uses: actions/checkout@v2
-
-    - name: Login to Azure
+    - name: Log in to Azure using service principal
       uses: azure/login@v1
       with:
         creds: ${{ secrets.AZURE_CREDENTIALS }}
 
-    - name: Deploy Sample Rule
-      run: echo "Pretend deploying suspicious_logins.kql"
+    - name: Echo success (simulate deployment)
+      run: echo "✅ Successfully authenticated to Azure. No deployment executed."
