@@ -1,1 +1,3 @@
-
+SigninLogs
+| where ResultType == "50053"
+| summarize count() by UserPrincipalName, bin(TimeGenerated, 1h)
