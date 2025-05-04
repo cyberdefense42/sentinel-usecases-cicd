@@ -1,1 +1,22 @@
+name: Sentinel CI/CD Deployment
 
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy-to-sentinel:
+    runs-on: ubuntu-latest
+    steps:
+
+    - name: Checkout Code
+      uses: actions/checkout@v2
+
+    - name: Login to Azure
+      uses: azure/login@v1
+      with:
+        creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+    - name: Deploy Sample Rule
+      run: echo "Pretend deploying suspicious_logins.kql"
